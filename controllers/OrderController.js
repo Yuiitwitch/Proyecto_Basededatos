@@ -1,176 +1,173 @@
 //Importo modelo de datos
 const db = require("../models");
-const movie = db.movie;
+const order = db.order;
 const Op = db.Sequelize.Op; //Import all ORM sequelize functions 
 
-// var movies  = require('../models').movies;  //Add for dependency response
-
-const MovieController = {}; //Create the object controller
-
+const OrderController = {}; //Create the object controller
 
 
 //CRUD end-points Functions
 //-------------------------------------------------------------------------------------
-//GET all movies from database
-MovieController.getAll = (req, res) => {
-    
-    movie.findAll({include: [{ model:movie}]})
+//GET all categories from database
+OrderController.getAll = (req, res) => {
+    const type = req.query.type;
+    var condition = type ? { type: { [Op.like]: `%${type}%` } } : null;
+  
+    order.findAll({ where: condition })
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving movies."
+            err.message || "Some error occurred while retrieving categories."
         });
       });
   };
 
 
 //-------------------------------------------------------------------------------------
-//GET movies by Id from database
-MovieController.getById = (req, res) => {
+//GET categories by Id from database
+OrderController.getById = (req, res) => {
     const id = req.params.id;
-
-    movie.findByPk(id, {include: [{ model:movie}]})
+  
+    order.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
         } else {
           res.status(404).send({
-            message: `Cannot find Tutorial with id=${id}.`
+            message: `Cannot find order with id=${id}.`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error retrieving movies with id=" + id
+          message: "Error retrieving categories with id=" + id
         });
       });
   };
 
 
-
 //-------------------------------------------------------------------------------------
-//CREATE a new movie in database
-MovieController.create = (req, res) => {
+//CREATE a new order in database
+OrderController.create = (req, res) => {
     // Validate request
-    if (!req.body.title) {
+    if (!req.body.type) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
       return;
     }
   
-    // Create a Movies
-    const newMovie = {
-      name: req.body.name,
-      gender: req.body.gender,
-      actor: req.body.actor
+    // Create a order
+    const neWorder = {
+      returnDate: req.body.returnDate,
+      rentalDate: req.body.rentalDate
     };
   
-    // Save Movies in the database
-    movie.create(newMovie)
+    // Save order in the database
+    order.create(neWorder)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the Movie."
+            err.message || "Some error occurred while creating the neWorder."
         });
       });
   };
 
 
 //-------------------------------------------------------------------------------------
-//UPDATE a movie from database
-MovieController.update = (req, res) => {
+//UPDATE a order from database
+OrderController.update = (req, res) => {
     const id = req.params.id;
   
-    movie.update(req.body, {
+    order.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Movie was updated successfully."
+            message: "order was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update Movie with id=${id}. Maybe Movie was not found or req.body is empty!`
+            message: `Cannot update order with id=${id}. Maybe Movie was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Movie with id=" + id
+          message: "Error updating order with id=" + id
         });
       });
   };
 
 
 //-------------------------------------------------------------------------------------
-//GET movie by Title from database 
-//FindByTitle
-  MovieController.getByTitle = (req, res) => {
-    movie.findAll({ where: { movie: req.params.name } })
+//GET categories by Type from database  
+//FindByType
+OrderController.getByType = (req, res) => {
+    order.findAll({ where: { order: req.params.id } })
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving categories."
         });
       });
   };
 
 
 //-------------------------------------------------------------------------------------
-//DELETE a movie by Id from database
-MovieController.delete = (req, res) => {
+//DELETE a order by Id from database
+OrderController.delete = (req, res) => {
     const id = req.params.id;
   
-    movie.destroy({
+    order.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Movie was deleted successfully!"
+            message: "order was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Movie with id=${id}. Maybe Movie was not found!`
+            message: `Cannot delete order with id=${id}. Maybe Movie was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Movie with id=" + id
+          message: "Could not delete order with id=" + id
         });
       });
   };
 
 
 //-------------------------------------------------------------------------------------
-//DELETE all movies from database
-//delete all movies 
-  MovieController.deleteAll = (req, res) => {
-    movie.destroy({
+//DELETE all order from database
+//delete all order  
+OrderController.deleteAll = (req, res) => {
+    order.destroy({
       where: {},
       truncate: false
     })
       .then(nums => {
-        res.send({ message: `${nums} Movies were deleted successfully!` });
+        res.send({ message: `${nums} order were deleted successfully!` });
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while removing all movies."
+            err.message || "Some error occurred while removing all order."
         });
       });
   };
 
-module.exports = MovieController;
+module.exports = OrderController;

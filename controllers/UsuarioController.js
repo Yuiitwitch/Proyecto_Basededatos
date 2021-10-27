@@ -1,19 +1,19 @@
 //Importo modelo de datos
 const db = require("../models");
-const category = db.category;
+const usuario = db.usuario;
 const Op = db.Sequelize.Op; //Import all ORM sequelize functions 
 
-const CategoryController = {}; //Create the object controller
+const UsuarioController = {}; //Create the object controller
 
 
 //CRUD end-points Functions
 //-------------------------------------------------------------------------------------
 //GET all categories from database
-CategoryController.getAll = (req, res) => {
+UsuarioController.getAll = (req, res) => {
     const type = req.query.type;
     var condition = type ? { type: { [Op.like]: `%${type}%` } } : null;
   
-    category.findAll({ where: condition })
+    usuario.findAll({ where: condition })
       .then(data => {
         res.send(data);
       })
@@ -28,16 +28,16 @@ CategoryController.getAll = (req, res) => {
 
 //-------------------------------------------------------------------------------------
 //GET categories by Id from database
-CategoryController.getById = (req, res) => {
+UsuarioController.getById = (req, res) => {
     const id = req.params.id;
   
-    category.findByPk(id)
+    usuario.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
         } else {
           res.status(404).send({
-            message: `Cannot find Category with id=${id}.`
+            message: `Cannot find usuario with id=${id}.`
           });
         }
       })
@@ -50,8 +50,8 @@ CategoryController.getById = (req, res) => {
 
 
 //-------------------------------------------------------------------------------------
-//CREATE a new category in database
-CategoryController.create = (req, res) => {
+//CREATE a new usuario in database
+UsuarioController.create = (req, res) => {
     // Validate request
     if (!req.body.type) {
       res.status(400).send({
@@ -60,48 +60,50 @@ CategoryController.create = (req, res) => {
       return;
     }
   
-    // Create a Category
-    const newCategory = {
-      type: req.body.type,
+    // Create a usuario
+    const neWUsuario = {
+      name: req.body.name,
+      lastName: req.body.name,
+      email: req.body.email,
       age: req.body.age
     };
   
-    // Save Category in the database
-    category.create(newCategory)
+    // Save usuario in the database
+    usuario.create(neWUsuario)
       .then(data => {
         res.send(data);
       })
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while creating the newCategory."
+            err.message || "Some error occurred while creating the neWUsuario."
         });
       });
   };
 
 
 //-------------------------------------------------------------------------------------
-//UPDATE a category from database
-CategoryController.update = (req, res) => {
+//UPDATE a usuario from database
+UsuarioController.update = (req, res) => {
     const id = req.params.id;
   
-    category.update(req.body, {
+    usuario.update(req.body, {
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Category was updated successfully."
+            message: "usuario was updated successfully."
           });
         } else {
           res.send({
-            message: `Cannot update Category with id=${id}. Maybe Movie was not found or req.body is empty!`
+            message: `Cannot update usuario with id=${id}. Maybe Movie was not found or req.body is empty!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Error updating Category with id=" + id
+          message: "Error updating usuario with id=" + id
         });
       });
   };
@@ -110,8 +112,8 @@ CategoryController.update = (req, res) => {
 //-------------------------------------------------------------------------------------
 //GET categories by Type from database  
 //FindByType
-CategoryController.getByType = (req, res) => {
-    category.findAll({ where: { type: req.params.type } })
+UsuarioController.getByType = (req, res) => {
+    usuario.findAll({ where: { usuario: req.params.id } })
       .then(data => {
         res.send(data);
       })
@@ -125,27 +127,27 @@ CategoryController.getByType = (req, res) => {
 
 
 //-------------------------------------------------------------------------------------
-//DELETE a category by Id from database
-CategoryController.delete = (req, res) => {
+//DELETE a usuario by Id from database
+UsuarioController.delete = (req, res) => {
     const id = req.params.id;
   
-    category.destroy({
+    usuario.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Category was deleted successfully!"
+            message: "usuario was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Category with id=${id}. Maybe Movie was not found!`
+            message: `Cannot delete usuario with id=${id}. Maybe Movie was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Category with id=" + id
+          message: "Could not delete usuario with id=" + id
         });
       });
   };
@@ -154,8 +156,8 @@ CategoryController.delete = (req, res) => {
 //-------------------------------------------------------------------------------------
 //DELETE all categories from database
 //delete all categories   
-CategoryController.deleteAll = (req, res) => {
-    category.destroy({
+UsuarioController.deleteAll = (req, res) => {
+    usuario.destroy({
       where: {},
       truncate: false
     })
@@ -170,4 +172,4 @@ CategoryController.deleteAll = (req, res) => {
       });
   };
 
-module.exports = CategoryController;
+module.exports = UsuarioController;

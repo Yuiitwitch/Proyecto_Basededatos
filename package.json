@@ -1,7 +1,7 @@
 {
   "name": "prc18",
   "version": "0.0.1",
-  "description": "Proyecto inicial API REST",
+  "description": "Proyecto_Final_API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
     "API",
     "GeeksHubs"
   ],
-  "author": "Jose Marin",
+  "author": "Alfonso Lara",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",

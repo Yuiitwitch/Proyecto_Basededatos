@@ -2,64 +2,58 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    
-      await queryInterface.bulkInsert('movies', [{
-        title : "Train to Busan",
-        categoryId : 1,
+  
+      await queryInterface.bulkInsert('categories', [{
+        type: 'zombies',
+        age: 21,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "Shaun of the dead",
-        categoryId : 1,
+        type: 'horror',
+        age: 16,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "ZombieLand",
-        categoryId : 1,
+        type: 'action',
+        age: 21,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "Evil Dead",
-        categoryId : 2,
+        type: 'drama',
+        age: 12,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "Evil Dead 2",
-        categoryId : 2,
+        type: 'fantasy',
+        age: 8,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "Evil Dead 3",
-        categoryId : 2,
+        type: 'mystery',
+        age: 12,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "28 Days Later",
-        categoryId : 2,
+        type: 'romance',
+        age: 12,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "Zombiever",
-        categoryId : 1,
+        type: 'thriller',
+        age: 12,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        title : "Overlord",
-        categoryId : 2,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        title : "Black Sheep",
-        categoryId : 1,
+        type: 'comedy',
+        age: 12,
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -68,7 +62,7 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     
-      await queryInterface.bulkDelete('movies', null, {});
+      await queryInterface.bulkDelete('categories', null, {});
      
   }
 };

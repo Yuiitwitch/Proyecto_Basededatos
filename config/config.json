@@ -2,7 +2,7 @@
   "development": {
     "username": "remote",
     "password": "2pro456X",
-    "database": "database_development",
+    "database": "ProyectoFinal_BaseDeDatos",
     "host": "172.16.8.151",
     "port": "3306",
     "dialect": "mysql"
