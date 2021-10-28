@@ -6,6 +6,9 @@ const Op = db.Sequelize.Op; //Import all ORM sequelize functions
 const UsuarioController = {}; //Create the object controller
 
 
+
+
+
 //CRUD end-points Functions
 //-------------------------------------------------------------------------------------
 //GET all categories from database

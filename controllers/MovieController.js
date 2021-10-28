@@ -1,6 +1,6 @@
 //Importo modelo de datos
 const db = require("../models");
-const movie = db.movie;
+const movies = db.movie;
 const Op = db.Sequelize.Op; //Import all ORM sequelize functions 
 
 // var movies  = require('../models').movies;  //Add for dependency response
@@ -14,7 +14,7 @@ const MovieController = {}; //Create the object controller
 //GET all movies from database
 MovieController.getAll = (req, res) => {
     
-    movie.findAll({include: [{ model:movie}]})
+    movies.findAll({include: [{ model:movie}]})
       .then(data => {
         res.send(data);
       })
@@ -113,7 +113,7 @@ MovieController.update = (req, res) => {
 //-------------------------------------------------------------------------------------
 //GET movie by Title from database 
 //FindByTitle
-  MovieController.getByTitle = (req, res) => {
+  MovieController.getByName = (req, res) => {
     movie.findAll({ where: { movie: req.params.name } })
       .then(data => {
         res.send(data);
