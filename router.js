@@ -14,9 +14,9 @@ router.use('/api', UserRouter); //Login and register routes
 // router.use('/movie',auth, MovieRouter); //add auth
 // router.use('/order',auth, OrderRouter);
 // router.use('/usuario',auth, UsuarioRouter);
-router.use('/movie', MovieRouter); //add auth
-router.use('/order', OrderRouter);
-router.use('/usuario', UsuarioRouter);
+router.use('/movies', MovieRouter); //add auth
+router.use('/orders', OrderRouter);
+router.use('/usuarios', UsuarioRouter);
 
 
 module.exports = router;

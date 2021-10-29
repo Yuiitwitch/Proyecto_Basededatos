@@ -1,6 +1,6 @@
 //Importo modelo de datos
 const db = require("../models");
-const order = db.order;
+const orders = db.order;
 const Op = db.Sequelize.Op; //Import all ORM sequelize functions 
 
 const OrderController = {}; //Create the object controller
@@ -10,10 +10,8 @@ const OrderController = {}; //Create the object controller
 //-------------------------------------------------------------------------------------
 //GET all categories from database
 OrderController.getAll = (req, res) => {
-    const type = req.query.type;
-    var condition = type ? { type: { [Op.like]: `%${type}%` } } : null;
   
-    order.findAll({ where: condition })
+    orders.findAll()
       .then(data => {
         res.send(data);
       })
@@ -31,7 +29,7 @@ OrderController.getAll = (req, res) => {
 OrderController.getById = (req, res) => {
     const id = req.params.id;
   
-    order.findByPk(id)
+    orders.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -67,7 +65,7 @@ OrderController.create = (req, res) => {
     };
   
     // Save order in the database
-    order.create(neWorder)
+    orders.create(neWorder)
       .then(data => {
         res.send(data);
       })
@@ -85,7 +83,7 @@ OrderController.create = (req, res) => {
 OrderController.update = (req, res) => {
     const id = req.params.id;
   
-    order.update(req.body, {
+    orders.update(req.body, {
       where: { id: id }
     })
       .then(num => {
@@ -111,7 +109,7 @@ OrderController.update = (req, res) => {
 //GET categories by Type from database  
 //FindByType
 OrderController.getByType = (req, res) => {
-    order.findAll({ where: { order: req.params.id } })
+    orders.findAll({ where: { order: req.params.id } })
       .then(data => {
         res.send(data);
       })

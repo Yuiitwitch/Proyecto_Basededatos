@@ -14,7 +14,7 @@ const MovieController = {}; //Create the object controller
 //GET all movies from database
 MovieController.getAll = (req, res) => {
     
-    movies.findAll({include: [{ model:movie}]})
+    movies.findAll()
       .then(data => {
         res.send(data);
       })
@@ -32,7 +32,7 @@ MovieController.getAll = (req, res) => {
 MovieController.getById = (req, res) => {
     const id = req.params.id;
 
-    movie.findByPk(id, {include: [{ model:movie}]})
+    movies.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -114,7 +114,10 @@ MovieController.update = (req, res) => {
 //GET movie by Title from database 
 //FindByTitle
   MovieController.getByName = (req, res) => {
-    movie.findAll({ where: { movie: req.params.name } })
+
+    let name = req.params.name;
+
+    movies.findAll({ where: { name:name } })
       .then(data => {
         res.send(data);
       })
@@ -125,14 +128,46 @@ MovieController.update = (req, res) => {
         });
       });
   };
+//GET movie by genere from database
+MovieController.getByGender = (req, res) => {
 
+  let gender = req.params.gender;
+  
+  movies.findAll({ where: { gender: gender }})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
+
+//Get movie by actor from database
+MovieController.getByActor = (req, res) => {
+
+  let actor = req.params.actor;
+  
+  movies.findAll({ where: { actor:actor }})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving tutorials."
+      });
+    });
+};
 
 //-------------------------------------------------------------------------------------
 //DELETE a movie by Id from database
 MovieController.delete = (req, res) => {
     const id = req.params.id;
   
-    movie.destroy({
+    movies.destroy({
       where: { id: id }
     })
       .then(num => {
@@ -158,7 +193,7 @@ MovieController.delete = (req, res) => {
 //DELETE all movies from database
 //delete all movies 
   MovieController.deleteAll = (req, res) => {
-    movie.destroy({
+    movies.destroy({
       where: {},
       truncate: false
     })

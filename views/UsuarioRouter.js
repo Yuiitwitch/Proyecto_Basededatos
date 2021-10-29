@@ -7,7 +7,7 @@ const UsuarioController = require('../controllers/UsuarioController');
 // End-points CRUD movies
 router.get('/', UsuarioController.getAll);
 router.get('/:id', UsuarioController.getById);
-router.get('/type/:type', UsuarioController.getByType);
+router.get('/usuario/:usuario', UsuarioController.getByType);
 router.post('/', UsuarioController.create);
 router.put('/:id', UsuarioController.update);
 router.delete('/', UsuarioController.deleteAll);

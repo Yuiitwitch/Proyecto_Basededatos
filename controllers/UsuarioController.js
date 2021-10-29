@@ -1,6 +1,6 @@
 //Importo modelo de datos
 const db = require("../models");
-const usuario = db.usuario;
+const usuarios = db.usuario;
 const Op = db.Sequelize.Op; //Import all ORM sequelize functions 
 
 const UsuarioController = {}; //Create the object controller
@@ -13,10 +13,8 @@ const UsuarioController = {}; //Create the object controller
 //-------------------------------------------------------------------------------------
 //GET all categories from database
 UsuarioController.getAll = (req, res) => {
-    const type = req.query.type;
-    var condition = type ? { type: { [Op.like]: `%${type}%` } } : null;
-  
-    usuario.findAll({ where: condition })
+
+    usuarios.findAll()
       .then(data => {
         res.send(data);
       })
@@ -34,7 +32,7 @@ UsuarioController.getAll = (req, res) => {
 UsuarioController.getById = (req, res) => {
     const id = req.params.id;
   
-    usuario.findByPk(id)
+    usuarios.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -72,7 +70,7 @@ UsuarioController.create = (req, res) => {
     };
   
     // Save usuario in the database
-    usuario.create(neWUsuario)
+    usuarios.create(neWUsuario)
       .then(data => {
         res.send(data);
       })
@@ -90,7 +88,7 @@ UsuarioController.create = (req, res) => {
 UsuarioController.update = (req, res) => {
     const id = req.params.id;
   
-    usuario.update(req.body, {
+    usuarios.update(req.body, {
       where: { id: id }
     })
       .then(num => {
@@ -116,7 +114,7 @@ UsuarioController.update = (req, res) => {
 //GET categories by Type from database  
 //FindByType
 UsuarioController.getByType = (req, res) => {
-    usuario.findAll({ where: { usuario: req.params.id } })
+    usuarios.findAll({ where: { usuario: req.params.id } })
       .then(data => {
         res.send(data);
       })
@@ -134,7 +132,7 @@ UsuarioController.getByType = (req, res) => {
 UsuarioController.delete = (req, res) => {
     const id = req.params.id;
   
-    usuario.destroy({
+    usuarios.destroy({
       where: { id: id }
     })
       .then(num => {
@@ -160,7 +158,7 @@ UsuarioController.delete = (req, res) => {
 //DELETE all categories from database
 //delete all categories   
 UsuarioController.deleteAll = (req, res) => {
-    usuario.destroy({
+    usuarios.destroy({
       where: {},
       truncate: false
     })
