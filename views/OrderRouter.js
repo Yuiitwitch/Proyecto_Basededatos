@@ -8,6 +8,7 @@ const OrderController = require('../controllers/OrderController');
 router.get('/', OrderController.getAll);
 router.get('/:id', OrderController.getById);
 router.get('/type/:type', OrderController.getByType);
+router.get('/city/:city', OrderController.getByType);
 router.post('/', OrderController.create);
 router.put('/:id', OrderController.update);
 router.delete('/', OrderController.deleteAll);

@@ -45,6 +45,22 @@ OrderController.getById = (req, res) => {
         });
       });
   };
+//Search by available cities
+OrderController.getByCity = (req, res) => {
+
+  let city = req.params.city;
+  
+  movies.findAll({ city :city })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Unable to show available cities."
+      });
+    });
+};
 
 
 //-------------------------------------------------------------------------------------

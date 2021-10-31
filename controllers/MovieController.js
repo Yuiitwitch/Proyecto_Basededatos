@@ -124,7 +124,7 @@ MovieController.update = (req, res) => {
       .catch(err => {
         res.status(500).send({
           message:
-            err.message || "Some error occurred while retrieving tutorials."
+            err.message || "Some error occurred while retrieving title movie."
         });
       });
   };
@@ -140,7 +140,7 @@ MovieController.getByGender = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Some error occurred while retrieving gender."
       });
     });
 };
