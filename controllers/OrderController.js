@@ -51,7 +51,7 @@ OrderController.getById = (req, res) => {
 //CREATE a new order in database
 OrderController.create = (req, res) => {
     // Validate request
-    if (!req.body.type) {
+    if (!req.body) {
       res.status(400).send({
         message: "Content can not be empty!"
       });
