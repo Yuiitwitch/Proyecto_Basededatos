@@ -11,11 +11,11 @@ const PORT = process.env.PORT || 3000; //Configuramos puerto heroku
 
 //Config Cors Options
 var corsOptions = {
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-  };
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  preflightContinue: false,
+  optionsSuccessStatus: 204
+};
 
 //Middleware
 app.use(morgan('combined', { stream: logger.stream }));
@@ -23,12 +23,12 @@ app.use(express.json());
 app.use(cors(corsOptions)); //Add CORS Middleware
 
 //Rutas
-app.get('/', (req, res) => {res.send('Bienvenidos a Express');});
+app.get('/', (req, res) => { res.send('Bienvenidos a Express'); });
 app.use(router);
 
 //Connecting to the database
-db.then(()=>{
-    //Starting server
-        app.listen(PORT, ()=> console.log(`Server on port ${PORT}`.bgGreen.black));
-    })
-    .catch((err)=> console.log(err.message));   
+db.then(() => {
+  //Starting server
+  app.listen(PORT, () => console.log(`Server on port ${PORT}`.bgGreen.black));
+})
+  .catch((err) => console.log(err.message));
