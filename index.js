@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(cors(corsOptions)); //Add CORS Middleware
 
 //Rutas
-app.get('/', (req, res) => { res.send('Bienvenidos a Express'); });
+app.get('/', (req, res) => { res.send('Bienvenidos a mi proyecto de BaseDeDAtos'); });
 app.use(router);
 
 //Connecting to the database
