@@ -51,22 +51,21 @@ UsuarioController.getById = (req, res) => {
 
 
 //-------------------------------------------------------------------------------------
-//CREATE a new usuario in database
+// //CREATE a new usuario in database
 UsuarioController.create = (req, res) => {
   // Validate request
-  if (!req.body.type) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
-  }
+  // if (!req.body.type) {
+  //   res.status(400).send({
+  //     message: "Content can not be empty!"
+  //   });
+  //   return;
+  // }
 
   // Create a usuario
   const neWUsuario = {
     name: req.body.name,
-    lastName: req.body.name,
+    lastName: req.body.lastName,
     email: req.body.email,
-    age: req.body.age
   };
 
   // Save usuario in the database

@@ -1,24 +1,24 @@
 {
   "development": {
-    "username": "remote",
-    "password": "2pro456X",
-    "database": "ProyectoFinal_BaseDeDatos",
-    "host": "172.16.11.159",
+    "username": "bc036ae14d34e5",
+    "password": "aaa24769",
+    "database": "heroku_4362ff399c72cd5",
+    "host": "eu-cdbr-west-01.cleardb.com",
     "port": "3306",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "root",
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "bc036ae14d34e5",
+    "password": "aaa24769",
+    "database": "heroku_4362ff399c72cd5",
+    "host": "eu-cdbr-west-01.cleardb.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "root",
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "bc036ae14d34e5",
+    "password": "aaa24769",
+    "database": "heroku_4362ff399c72cd5",
+    "host": "eu-cdbr-west-01.cleardb.com",
     "dialect": "mysql"
   }
 }
