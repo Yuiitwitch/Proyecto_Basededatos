@@ -3,7 +3,7 @@
     "username": "remote",
     "password": "2pro456X",
     "database": "ProyectoFinal_BaseDeDatos",
-    "host": "192.168.0.22",
+    "host": "172.16.11.159",
     "port": "3306",
     "dialect": "mysql"
   },
